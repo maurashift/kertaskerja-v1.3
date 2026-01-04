@@ -62,3 +62,27 @@ export const AlertQuestion = (
     reverseButtons: true,
   });
 };
+export const AlertQuestion2 = (
+  options: AlertQuestionOptions
+): Promise<SweetAlertResult> => {
+  const {
+    title,
+    text = "",
+    icon = "question",
+    confirmButtonText = "Ya",
+    cancelButtonText = "Batal",
+  } = options;
+
+  return Swal.fire({
+    title,
+    text,
+    icon,
+    showConfirmButton: true,
+    showCancelButton: true,
+    confirmButtonText,
+    cancelButtonText,
+    confirmButtonColor: "#08C2FF",
+    cancelButtonColor: "#DA415B",
+    reverseButtons: true,
+  });
+};

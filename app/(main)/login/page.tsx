@@ -47,7 +47,7 @@ const LoginPage = () => {
       >
         <div className="mb-6 flex flex-col items-center">
           <Image
-            src="https://logo.kertaskerja.cc/logo/kab-mahakam-ulu-2.png"
+            src="https://logo.kertaskerja.cc/logo/developer.png"
             alt="Logo"
             width={90}
             height={90}

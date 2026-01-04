@@ -24,7 +24,7 @@ type BrandingState = {
   api_csf: string
   tahun: OptionNumber | null
   opd: OptionString | null
-  user: unknown
+  user: any
 }
 
 /* context value */
