@@ -36,9 +36,9 @@ import {
   FormEditPohon,
 } from "./FormPohonPemda";
 
-import { ModalReview } from "@/components/pages/Pohon/ModalReview";
-import { ModalClone } from "@/components/pages/Pohon/ModalClone";
-import { ModalCetak } from "@/components/pages/Pohon/ModalCetak";
+import { ModalReview } from "../../ModalReview";
+import { ModalClone } from "../../ModalClone";
+import { ModalCetak } from "../../ModalCetak";
 
 /* util */
 const uid = () => Date.now();
@@ -140,7 +140,7 @@ export const Pohon = ({
         body: JSON.stringify({ is_active: !tema.is_active }),
       });
       deleteTrigger();
-    } catch {}
+    } catch { }
   };
 
   if (deleted) return null;
@@ -205,7 +205,11 @@ export const Pohon = ({
                             "question",
                             "Hapus",
                             "Batal"
-                          ).then((res) => res.isConfirmed && hapusReview(r.id))
+                          ).then((res) => {
+                            if (res.isConfirmed) {
+                              res.isConfirmed && hapusReview(r.id)
+                            };
+                          })
                         }
                       >
                         <TbTrash />

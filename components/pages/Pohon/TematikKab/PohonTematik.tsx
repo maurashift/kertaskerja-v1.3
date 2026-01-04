@@ -5,7 +5,7 @@ import "@/components/pages/Pohon/treeflex.css";
 import { useEffect, useState } from "react";
 import { LoadingBeat } from "@/lib/loading";
 import { Pohon } from "@/components/pages/Pohon/Pemda/Pohon";
-import { PohonLaporan } from "@/components/lib/Pohon/Cascading/PohonLaporan";
+// import { PohonLaporan } from "@/components/lib/Pohon/Cascading/PohonLaporan";
 import { getOpdTahun, getToken, getUser } from "@/lib/cookie";
 
 type JenisPohon = "pemda" | "laporan" | "";

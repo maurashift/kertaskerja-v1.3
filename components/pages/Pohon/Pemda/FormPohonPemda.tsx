@@ -14,26 +14,17 @@ import {
   ButtonRedBorder,
   ButtonSkyBorder,
 } from '@/components/ui/button';
-import {
-  LoadingButtonClip,
-  LoadingSync,
-} from '@/lib/loading';
+import { LoadingButtonClip } from '@/lib/loading';
 import { AlertNotification } from '@/lib/alert';
 import { getOpdTahun, getToken } from '@/lib/cookie';
 import { Pohon } from './Pohon';
 import {
-  TbCheck,
   TbCirclePlus,
   TbCircleX,
   TbDeviceFloppy,
 } from 'react-icons/tb';
 
-/*TYPES*/
-
-interface OptionType {
-  value: number;
-  label: string;
-}
+/* ================= TYPES ================= */
 
 interface OptionTypeString {
   value: string;
@@ -65,22 +56,23 @@ interface FormValue {
   indikator: Indikator[];
 }
 
-/*FORM CREATE*/
+/* ================= COMPONENT ================= */
 
 export const FormPohonPemda: React.FC<{
   id: number | null;
   level: number;
   formId: number;
-  onCancel?: () => void;
+  onCancelAction?: () => void;
   pokin: 'pemda' | 'opd';
-}> = ({ id, level, formId, onCancel }) => {
+}> = ({ id, level, formId, onCancelAction }) => {
   const token = getToken();
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
+  // --- ADDED: isMount State ---
+  const [isMount, setIsMount] = useState(false);
+
   const { control, handleSubmit } = useForm<FormValue>({
-    defaultValues: {
-      indikator: [],
-    },
+    defaultValues: { indikator: [] },
   });
 
   const { fields, append, remove } = useFieldArray({
@@ -90,7 +82,6 @@ export const FormPohonPemda: React.FC<{
 
   const [tahun, setTahun] = useState<any>(null);
   const [opdOption, setOpdOption] = useState<OptionTypeString[]>([]);
-  const [programOption, setProgramOption] = useState<OptionTypeString[]>([]);
   const [kodeOpd, setKodeOpd] = useState<OptionTypeString | null>(null);
 
   const [unggulanBupati, setUnggulanBupati] = useState(false);
@@ -104,7 +95,12 @@ export const FormPohonPemda: React.FC<{
   const [submitting, setSubmitting] = useState(false);
   const [addedData, setAddedData] = useState<any>(null);
 
+  /* ================= EFFECT ================= */
+
   useEffect(() => {
+    // --- ADDED: Set isMount to true ---
+    setIsMount(true);
+
     const data = getOpdTahun();
     if (data?.tahun) {
       setTahun({
@@ -114,10 +110,12 @@ export const FormPohonPemda: React.FC<{
     }
   }, []);
 
+  /* ================= API ================= */
+
   const fetchOpd = async () => {
     try {
       const res = await fetch(`${API_URL}/opd/findall`, {
-        headers: { Authorization: token ?? ''},
+        headers: { Authorization: token ?? '' },
       });
       const json = await res.json();
       setOpdOption(
@@ -129,21 +127,7 @@ export const FormPohonPemda: React.FC<{
     } catch {}
   };
 
-  const fetchProgramUnggulan = async () => {
-    try {
-      const res = await fetch(
-        `${API_URL}/program_unggulan/findbytahun/${tahun?.value}`,
-        { headers: { Authorization: token ?? ''} }
-      );
-      const json = await res.json();
-      setProgramOption(
-        json?.data?.map((p: any) => ({
-          value: p.kode_program_unggulan,
-          label: `${p.nama_program_unggulan} - ${p.rencana_implementasi}`,
-        })) || []
-      );
-    } catch {}
-  };
+  /* ================= SUBMIT ================= */
 
   const onSubmit: SubmitHandler<FormValue> = async (form) => {
     try {
@@ -206,24 +190,28 @@ export const FormPohonPemda: React.FC<{
       if (!res.ok) throw new Error();
 
       const json = await res.json();
-        setAddedData(json.data);
+      setAddedData(json.data);
 
-        AlertNotification({
-        title: 'Berhasil',
-        text: 'Pohon berhasil ditambahkan',
-        icon: 'success',
-        });
+      AlertNotification(
+        'Berhasil',
+        'Pohon berhasil ditambahkan',
+        'success',
+      );
+    } catch {
+      AlertNotification(
+        'Gagal',
+        'Terjadi kesalahan server',
+        'error',
+      );
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
-        } catch {
-        AlertNotification({
-            title: 'Gagal',
-            text: 'Terjadi kesalahan server',
-            icon: 'error',
-        });
-        } finally {
-        setSubmitting(false);
-        }
+  /* ================= RENDER ================= */
 
+  // --- ADDED: Hydration Guard ---
+  if (!isMount) return null;
 
   if (addedData) {
     return (
@@ -238,7 +226,7 @@ export const FormPohonPemda: React.FC<{
 
   return (
     <li>
-      <div className="tf-nc tf w-[600px] rounded-lg shadow-lg p-4 bg-white">
+      <div className="tf-nc tf w-150 rounded-lg shadow-lg p-4 bg-white">
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <Controller
             name="nama_pohon"
@@ -253,18 +241,12 @@ export const FormPohonPemda: React.FC<{
           />
 
           {level > 2 && (
-            <Controller
-              name="kode_opd"
-              control={control}
-              render={() => (
-                <Select
-                  value={kodeOpd}
-                  options={opdOption}
-                  placeholder="Perangkat Daerah"
-                  onMenuOpen={fetchOpd}
-                  onChange={(v) => setKodeOpd(v)}
-                />
-              )}
+            <Select
+              value={kodeOpd}
+              options={opdOption}
+              placeholder="Perangkat Daerah"
+              onMenuOpen={fetchOpd}
+              onChange={(v) => setKodeOpd(v)}
             />
           )}
 
@@ -319,7 +301,10 @@ export const FormPohonPemda: React.FC<{
           <ButtonSkyBorder
             type="button"
             onClick={() =>
-              append({ nama_indikator: '', targets: [{ target: '', satuan: '' }] })
+              append({
+                nama_indikator: '',
+                targets: [{ target: '', satuan: '' }],
+              })
             }
           >
             <TbCirclePlus /> Tambah Indikator
@@ -349,7 +334,7 @@ export const FormPohonPemda: React.FC<{
             )}
           </ButtonSky>
 
-          <ButtonRed type="button" onClick={onCancel}>
+          <ButtonRed type="button" onClick={onCancelAction}>
             <TbCircleX /> Batal
           </ButtonRed>
         </form>

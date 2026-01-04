@@ -14,16 +14,12 @@ type AlertNotificationOptions = BaseAlertOptions & {
 };
 
 export const AlertNotification = (
-  options: AlertNotificationOptions
+  title?: string,
+  text: string = "",
+  icon: SweetAlertIcon = "info",
+  timer: number = 2000,
+  showConfirmButton = false,
 ): Promise<SweetAlertResult> => {
-  const {
-    title,
-    text = "",
-    icon = "info",
-    timer = 2000,
-    showConfirmButton = false,
-  } = options;
-
   return Swal.fire({
     title,
     text,
@@ -40,39 +36,30 @@ type AlertQuestionOptions = BaseAlertOptions & {
 };
 
 export const AlertQuestion = (
-  options: AlertQuestionOptions
+  title: string,
+  text?: string,
+  icon: SweetAlertIcon = "question",
+  confirmButtonText = "Ya",
+  cancelButtonText = "Batal"
 ): Promise<SweetAlertResult> => {
-  const {
-    title,
-    text = "",
-    icon = "question",
-    confirmButtonText = "Ya",
-    cancelButtonText = "Batal",
-  } = options;
-
   return Swal.fire({
     title,
     text,
     icon,
     showCancelButton: true,
-    confirmButtonColor: "#d33",
-    cancelButtonColor: "#2F2F30",
     confirmButtonText,
     cancelButtonText,
     reverseButtons: true,
   });
 };
-export const AlertQuestion2 = (
-  options: AlertQuestionOptions
-): Promise<SweetAlertResult> => {
-  const {
-    title,
-    text = "",
-    icon = "question",
-    confirmButtonText = "Ya",
-    cancelButtonText = "Batal",
-  } = options;
 
+export const AlertQuestion2 = (
+  title?: string,
+  text: string = "",
+  icon: SweetAlertIcon = "question",
+  confirmButtonText = "Ya",
+  cancelButtonText = "Batal",
+): Promise<SweetAlertResult> => {
   return Swal.fire({
     title,
     text,
