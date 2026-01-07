@@ -58,7 +58,7 @@ const BaseButton = ({
 export const ButtonSky = (props: ButtonProps) => (
   <BaseButton
     {...props}
-    className={`bg-gradient-to-r from-[#08C2FF] to-[#006BFF] hover:from-[#0584AD] hover:to-[#014CB2] text-white ${props.className}`}
+    className={`bg-linear-to-r from-[#08C2FF] to-[#006BFF] hover:from-[#0584AD] hover:to-[#014CB2] text-white ${props.className}`}
   />
 )
 
