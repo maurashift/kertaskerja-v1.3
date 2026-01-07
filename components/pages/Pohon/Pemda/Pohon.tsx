@@ -38,7 +38,7 @@ import {
 
 import { ModalReview } from "../../ModalReview";
 import { ModalClone } from "../../ModalClone";
-import { ModalCetak } from "../../ModalCetak";
+import { ModalCetak } from "../ModalCetak";
 
 /* util */
 const uid = () => Date.now();
@@ -55,7 +55,8 @@ export const Pohon = ({
   deleteTrigger,
   set_show_all,
 }: any) => {
-  const token = getToken();
+  const token = getToken() ?? "";
+
 
   const [show, setShow] = useState(false);
   const [edit, setEdit] = useState(false);
@@ -76,7 +77,7 @@ export const Pohon = ({
   const [isNewReview, setIsNewReview] = useState(false);
   const [isEditReview, setIsEditReview] = useState(false);
   const [reviewId, setReviewId] = useState<number | null>(null);
-
+  
   useEffect(() => {
     setShow(!!show_all);
   }, [show_all]);
@@ -151,6 +152,7 @@ export const Pohon = ({
     <li>
       {edit ? (
         <FormEditPohon
+          formId={tema.id}
           id={tema.id}
           level={tema.level_pohon}
           pokin="pemda"
@@ -249,7 +251,7 @@ export const Pohon = ({
                       "question",
                       "Hapus",
                       "Batal"
-                    ).then((r) => r.isConfirmed && hapusPohon(tema.id))
+                    )//.then((r) => r.isConfirmed && hapusPohon(tema.id))
                   }
                 >
                   <TbTrash /> Hapus

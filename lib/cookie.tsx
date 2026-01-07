@@ -82,12 +82,7 @@ export async function login(username: string, password: string): Promise<void> {
 
   const data = await res.json();
 
-  AlertNotification({
-  title: "Berhasil Login",
-  icon: "success",
-  timer: 2000,
-  showConfirmButton: true,
-});
+  AlertNotification("Berhasil Login", " ", "success", 2000, true);
 
 
   localStorage.setItem("sessionId", data.sessionId);

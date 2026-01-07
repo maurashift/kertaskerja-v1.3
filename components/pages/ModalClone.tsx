@@ -3,10 +3,10 @@
 import { useState } from "react";
 import { TbDeviceFloppy, TbX } from "react-icons/tb";
 import { Controller, SubmitHandler, useForm, useFieldArray } from "react-hook-form";
-import { ButtonSky, ButtonRed } from '@/components/global/Button';
-import { AlertNotification, AlertQuestion2 } from "@/components/global/Alert";
-import { getToken } from "@/components/lib/Cookie";
-import { LoadingButtonClip } from "@/components/global/Loading";
+import { ButtonSky, ButtonRed } from '@/components/ui/button';
+import { AlertNotification, AlertQuestion2 } from "@/lib/alert";
+import { getToken } from "@/lib/cookie";
+import { LoadingButtonClip } from "@/lib/loading";
 import Select from 'react-select';
 
 interface OptionTypeString {

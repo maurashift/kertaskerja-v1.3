@@ -76,11 +76,7 @@ const Header = () => {
         }))
       );
     } catch {
-      AlertNotification({
-        title: 'Gagal',
-        text: 'Tidak bisa memuat data OPD',
-        icon: 'error',
-      });
+      AlertNotification('Gagal', 'Tidak bisa memuat data OPD', 'error', 1500, true);
     } finally {
       setLoadingOpd(false);
     }
@@ -94,11 +90,7 @@ const Header = () => {
     if (selectedOpd) setCookie('opd', selectedOpd);
     if (tahun) setCookie('tahun', tahun);
 
-    AlertNotification({
-      title: 'Berhasil',
-      text: 'Perubahan berhasil diterapkan',
-      icon: 'success',
-    });
+    AlertNotification('Berhasil','Perubahan berhasil diterapkan', 'success', 1500, false);
 
     setTimeout(() => window.location.reload(), 1000);
   };

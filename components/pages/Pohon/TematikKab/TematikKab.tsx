@@ -165,7 +165,7 @@ const TematikKab = () => {
                   "warning",
                   "Cetak",
                   "Batal"
-                ).then((res) => res.isConfirmed && handleCetak())
+                )//.then((res) => res.isConfirmed && handleCetak())
               }
             >
               <TbPrinter className="mr-1" />

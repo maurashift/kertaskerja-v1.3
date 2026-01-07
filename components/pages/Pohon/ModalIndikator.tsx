@@ -1,5 +1,5 @@
 import React from 'react';
-import { ButtonRed } from '@/components/global/Button';
+import { ButtonRed } from '@/components/ui/button';
 import { TbX } from "react-icons/tb";
 
 

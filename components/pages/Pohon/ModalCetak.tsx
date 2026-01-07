@@ -1,12 +1,12 @@
 'use client'
 
 import { useState, useEffect, useRef } from "react";
-import { ButtonSkyBorder, ButtonRed } from '@/components/global/Button';
+import { ButtonSkyBorder, ButtonRed } from '@/components/ui/button';
 import { TbPrinter, TbXboxX } from "react-icons/tb";
 import html2canvas from "html2canvas";
-import { PohonCetak } from "./PohonCetak";
-import { LoadingButtonClip2 } from "@/components/global/Loading";
-import { getOpdTahun } from "@/components/lib/Cookie";
+import { PohonCetak } from "../PohonCetak";
+import { LoadingButtonClip2 } from "@/lib/loading";
+import { getOpdTahun } from "@/lib/cookie";
 
 interface modal {
     jenis: 'cascading' | 'non_cascading' | 'laporan';
