@@ -72,7 +72,7 @@ export const ButtonSkyBorder = (props: ButtonProps) => (
 export const ButtonGreen = (props: ButtonProps) => (
   <BaseButton
     {...props}
-    className={`bg-gradient-to-r from-[#1CE978] to-[#11B935] hover:from-[#1EB281] hover:to-[#0D7E5C] text-white ${props.className}`}
+    className={`bg-linear-to-r from-[#1CE978] to-[#11B935] hover:from-[#1EB281] hover:to-[#0D7E5C] text-white ${props.className}`}
   />
 )
 
@@ -86,7 +86,7 @@ export const ButtonGreenBorder = (props: ButtonProps) => (
 export const ButtonBlack = (props: ButtonProps) => (
   <BaseButton
     {...props}
-    className={`bg-gradient-to-r from-[#1C201A] to-[#434848] hover:from-[#3A4238] hover:to-[#676C6F] text-white ${props.className}`}
+    className={`bg-linear-to-r from-[#1C201A] to-[#434848] hover:from-[#3A4238] hover:to-[#676C6F] text-white ${props.className}`}
   />
 )
 
@@ -100,7 +100,7 @@ export const ButtonBlackBorder = (props: ButtonProps) => (
 export const ButtonRed = (props: ButtonProps) => (
   <BaseButton
     {...props}
-    className={`bg-gradient-to-r from-[#DA415B] to-[#BC163C] hover:from-[#B7384D] hover:to-[#951230] text-white ${props.className}`}
+    className={`bg-linear-to-r from-[#DA415B] to-[#BC163C] hover:from-[#B7384D] hover:to-[#951230] text-white ${props.className}`}
   />
 )
 
