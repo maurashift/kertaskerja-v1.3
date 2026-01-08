@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { TbCheck, TbCircleLetterXFilled, TbHourglass } from 'react-icons/tb';
-import { getToken } from '@/components/lib/Cookie';
+import { getToken } from '@/lib/cookie';
 import { TablePohonLaporan, Pagu, ProgramKegiatan } from '@/components/lib/Pohon/Cascading/PohonLaporan';
 
 interface pohon {

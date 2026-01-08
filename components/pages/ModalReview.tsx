@@ -2,10 +2,10 @@
 
 import { useState, useEffect } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import { ButtonSky, ButtonRed } from '@/components/global/Button';
-import { AlertNotification } from "@/components/global/Alert";
-import { getToken } from "@/components/lib/Cookie";
-import { LoadingClip, LoadingButtonClip } from "@/components/global/Loading";
+import { ButtonSky, ButtonRed } from '@/components/ui/button';
+import { AlertNotification } from "@/lib/alert";
+import { getToken } from "@/lib/cookie";
+import { LoadingClip, LoadingButtonClip } from "@/lib/loading";
 
 interface ModalProps {
     isOpen: boolean;

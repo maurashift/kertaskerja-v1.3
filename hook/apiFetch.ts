@@ -42,13 +42,8 @@ export async function apiFetch<T>(
 
     if (response.status === 401 || response.status === 403) {
       if (typeof window !== "undefined") {
-        AlertNotification({
-        title: "Login Ulang",
-        text: "Session telah habis, silakan login ulang",
-        icon: "info",
-        timer: 2000,
-        showConfirmButton: true,
-        });
+        AlertNotification("Login Ulang", "Session telah habis, silakan login ulang", "info", 2000,
+        true)
 
 
         localStorage.removeItem("token")
